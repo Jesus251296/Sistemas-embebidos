@@ -36,18 +36,17 @@ void loop(){
     }
     if (primo){
       for (int j; j<26;j++){
-        n= V[j];
-        V[j]= cont;
-        if(V[j]<10){
-           uni=V[j];}
+        int n1= V[j];
+        if(n1<10){
+           uni=n1;}
         else{
-           dec=V[j]/10;
-           uni=V[j]-dec*10;
+           dec=n1/10;
+           uni=n1-dec*10;
           }
       }  
     }
   }
-  delay(100000);
+  delay(50);
     
   }
   digitalWrite(unidades,HIGH);
@@ -59,10 +58,10 @@ void loop(){
   contador(dec);
   delay(100);
 }
-void contador(int i){
+void contador(int n1){
   
     delay(300);
-    switch (i){
+    switch (n1){
       case 0:
       digitalWrite(A,LOW);
       digitalWrite(B,LOW);
