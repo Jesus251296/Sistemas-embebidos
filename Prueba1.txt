@@ -1,0 +1,360 @@
+
+ int int1=0; // int0
+ int int2=0; // int1
+ int valor;  
+ String dato;
+ int conversor;
+ 
+
+void setup(){
+   Serial.begin(9600); 
+   attachInterrupt(0,fila1,LOW); 
+   attachInterrupt(1,fila2,LOW);  
+   Serial.println("Ingrese un valor");
+}
+
+void loop(){
+
+
+   if(Serial.available()>0){
+      dato= Serial.readString();
+      delay (1000); 
+      Serial.println(dato);
+      valor= dato.toInt();
+
+      switch(int1){ 
+      case 0://euro
+        switch(int2){ 
+          case 0:
+          conversor=valor;
+          break;
+          case 1://dolar
+          conversor= valor*1.21;
+          break;
+          case 2:
+          conversor= valor*4204.24;
+          break;
+          case 3:
+          conversor= valor*98.89;
+          break;
+         case 4:
+         conversor= valor*1.08;
+         break;
+         case 5:
+         conversor= valor*6.24;
+         break;
+       }
+      break;
+      case 1:
+        switch(int2){ 
+          case 0:
+          conversor=valor;
+          break;
+          case 1://dolar
+          conversor= valor*1.21;
+          break;
+          case 2:
+          conversor= valor*4204.24;
+          break;
+          case 3:
+          conversor= valor*98.89;
+          break;
+         case 4:
+         conversor= valor*1.08;
+         break;
+         case 5:
+         conversor= valor*6.24;
+         break;
+       }
+      break;
+      case 2:
+        switch(int2){ 
+          case 0:
+          conversor=valor;
+          break;
+          case 1://dolar
+          conversor= valor*1.21;
+          break;
+          case 2:
+          conversor= valor*4204.24;
+          break;
+          case 3:
+          conversor= valor*98.89;
+          break;
+         case 4:
+         conversor= valor*1.08;
+         break;
+         case 5:
+         conversor= valor*6.24;
+         break;
+       }
+      break;
+      case 3:
+        switch(int2){ 
+          case 0:
+          conversor=valor;
+          break;
+          case 1://dolar
+          conversor= valor*1.21;
+          break;
+          case 2:
+          conversor= valor*4204.24;
+          break;
+          case 3:
+          conversor= valor*98.89;
+          break;
+         case 4:
+         conversor= valor*1.08;
+         break;
+         case 5:
+         conversor= valor*6.24;
+         break;
+       }
+      break;
+      case 4:
+        switch(int2){ 
+          case 0:
+          conversor=valor;
+          break;
+          case 1://dolar
+          conversor= valor*1.21;
+          break;
+          case 2:
+          conversor= valor*4204.24;
+          break;
+          case 3:
+          conversor= valor*98.89;
+          break;
+         case 4:
+         conversor= valor*1.08;
+         break;
+         case 5:
+         conversor= valor*6.24;
+         break;
+       }
+      break;
+      case 5:
+        switch(int2){ 
+          case 0:
+          conversor=valor;
+          break;
+          case 1://dolar
+          conversor= valor*1.21;
+          break;
+          case 2:
+          conversor= valor*4204.24;
+          break;
+          case 3:
+          conversor= valor*98.89;
+          break;
+         case 4:
+         conversor= valor*1.08;
+         break;
+         case 5:
+         conversor= valor*6.24;
+         break;
+       }
+      break;
+    }
+    Serial.println(conversor);
+      
+
+   } 
+}
+void fila1 (){
+  switch(int1){ // opciones de boton 
+      case 0:
+        Serial.println("Euro");
+        int1++;
+      break;
+      case 1:
+        Serial.println("Dolar");
+        int1++;
+      break;
+      case 2:
+        Serial.println("Peso colombiano");
+        int1++;
+      break;
+      case 3:
+        Serial.println("Peso Argentino");
+        int1++;
+      break;
+      case 4:
+        Serial.println("Franco suizo");
+        int1++;
+      break;
+      case 5:
+        Serial.println("Real");
+        int1=0;
+      break;
+    }
+}
+void fila2(){
+  switch(int2){ 
+      case 0:
+        Serial.println("a Euro");
+        int2++;
+      break;
+      case 1:
+        Serial.println("a Dolar");
+        int2++;
+      break;
+      case 2:
+        Serial.println("a Peso colombiano");
+        int2++;
+      break;
+      case 3:
+        Serial.println("a Peso Argentino");
+        int2++;
+      break;
+      case 4:
+        Serial.println("a Franco suizo");
+        int2++;
+      break;
+      case 5:
+        Serial.println("a Real");
+        int2=0;
+      break;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+ #include <MsTimer2.h>
+ int conversor;
+ float voltaje;
+ int dutty;
+ int velocidad;
+ const int led=13;
+ int int1=0; // int0
+ int segundos=0;
+ 
+void setup() {
+  
+  MsTimer2::set(1000,reloj);
+  MsTimer2::start();
+  pinMode(led,OUTPUT);
+  attachInterrupt(0,interruptor,LOW); 
+  Serial.begin(9600)
+}
+
+void loop() {
+  if (int1==0){
+          conversor = analogRead(0);
+           dutty=conversor/4;
+           velocidad=(dutty*100)/255;
+           Serial.println(conversor);
+           Serial.println(voltaje);
+           Serial.println(dutty);
+           Serial.println(velocidad);
+  }
+}
+
+void reloj(){
+ if (int1==1){
+          if (segundos<dutty){
+            segundos++;
+            digitalWrite(led,HIGH);}
+ }
+}
+void interruptor(){
+  switch(int1){ // opciones de boton 
+      case 0:
+        Serial.println("Bienvenido, puede configurar el potenciometro.");
+        int1++;
+      break;
+      case 1:
+        int1++;
+      break;
+      case 2:
+        Serial.println("Fin");
+        int1++;
+        break;
+}
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+ #include<LiquidCrystal.h>
+ LiquidCrystal lcd (13,12,11,10,9,8);
+ String dato;
+ int tam;
+ int aux;
+ int i=0;
+ int j=0;
+ int valor=0;
+ void setup() {
+ lcd.begin(16,2);
+ Serial.begin(9600);
+ Serial.println("Ingrese vocales");
+
+}
+
+void loop() {
+      if(Serial.available()>0){
+       dato=Serial.readString(); 
+       dato.toLowerCase(); 
+       tam=dato.length()+1;
+       char vector [tam];
+       char vector2[tam];
+       char vector3[tam];
+       dato.toCharArray(vector,tam);
+    for(i=0;i<tam-1;i++){
+      if(vector[i]=='a' || vector[i]=='e' || vector[i]=='i' || vector[i]=='o' || vector[i]=='u'){
+       
+      }
+      else{
+        j++; 
+      }
+      
+    }
+    //Serial.println(String("No son vocales")+String(j));
+  if(j>0){
+    Serial.println("Error..!");
+    Serial.println("Ingrese nuevamente vocales a codificar");
+  }
+
+  else{
+    for(i=0;i<tam-1;i++){
+      if (vector[i]=='a')
+      vector2[i]==1;
+      if (vector[i]=='e')
+      vector2[i]==2;
+      if (vector[i]=='i')
+      vector2[i]==3;
+      if (vector[i]=='o')
+      vector2[i]==4;
+      if (vector[i]=='u')
+      vector2[i]==5;
+    }
+     for (i = 0; i <tam-1; i++) {
+            for (j = 0; j < tam - i - 1; j++) {
+                if (vector2[j+1]< vector2[j]) {
+                    aux = vector2[j+1];
+                    vector2[j+1]=vector2[j];
+                    vector2[j] = aux;
+                }
+            }
+        }
+     for(i=0;i<tam-1;i++){
+      if (vector2[i]==1)
+      vector3[i]=='a';
+      if (vector2[i]==2)
+      vector3[i]=='e';
+      if (vector2[i]==3)
+      vector3[i]=='i';
+      if (vector2[i]==4)
+      vector3[i]=='o';
+      if (vector2[i]==5)
+      vector3[i]=='u';
+      }
+      Serial.println(vector);
+      Serial.println(vector3);
+  lcd.setCursor(0,0);
+  lcd.print(vector);
+  lcd.setCursor(0,1);
+  lcd.print(vector3);
+  delay(2000);
+  lcd.clear();
+
+}
+}
+}
